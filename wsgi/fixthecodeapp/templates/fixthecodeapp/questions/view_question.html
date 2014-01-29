@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/themes/tricolore.css' %}">
+{% endblock %}
+
+{% block scripts %}
+{% load static %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+
+<script src="{% static 'js/fixthecode.js' %}"></script>
+{% endblock %}
+
+{% block pageHeading %}
+{{ question.name }}
+{% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="question">
+  <div class="code">
+    {% verbatim %}
+    <div class="container" ng-controller="FixTheCodeController">
+      <ul id="programList" ui-sortable="sortableOptions" ng-model="lines" ng-class="programListSize">
+        <li ng-repeat="line in lines"
+        ng-mouseenter="line.hovered = true"
+        ng-mouseleave="line.hovered = false"
+        ng-class="{commented : line.commented}">
+
+        <span class="comment"
+          ng-visible="line.hovered"
+          ng-click="toggleComment(line)">
+          {{commentChars}}
+        </span>
+        <pre><code data-language="javascript">{{line.code}}</code></pre>
+        </li>
+      </ul>
+
+      <button type="button" class="btn btn-default btn-large btn-primary checkButton" ng-class="{disabled: checkDisabled}" ng-click="checkAnswer()">Check</button>
+      {% endverbatim %}
+      <img src="{% static 'images/green_tick.png' %}" class="greenTick"/>
+      <!--<img src="{% static 'images/red_cross.png' %}" width="48" height="48" class="redCross"/>-->
+      {% if question.next_question_id %}
+      <div>
+        <div class="nextQuestion"><a href="{% url 'view_question' question.next_question_id %}">Next Question &gt;</a></div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="sideBar">
+    <div class="description">{{ question.description }}</div>
+    <div class="editQuestion"><a href="{% url 'edit_question' question.id %}">Edit Question</a></div>
+  </div>
+  <input type="hidden" id="question.code" value="{{question.code}}"/>
+  <input type="hidden" id="question.incorrectLines" value="{{question.incorrect_lines}}"/>
+</div>
+{% endblock %}

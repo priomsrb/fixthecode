@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block pageHeading %}
+Questions
+{% endblock %}
+
+{% block content %}
+<div class="createQuestion"><a href="{% url 'create_question' %}">Create Question</a></div>
+<table class="questionList">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+  </tr>
+{% for question in questions %}
+  <tr>
+    <td>
+      <a href="{% url 'view_question' question.id %}">{{question.id}}</a>
+    </td>
+    <td>
+      <a href="{% url 'view_question' question.id %}">{{question.name}}</a>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}
+

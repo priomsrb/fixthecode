@@ -1,0 +1,9 @@
+/wsgi/fixthecode/sqlite3.db
+*.py[co]
+*.sw[po]
+*.bak
+*.orig
+*~
+.project
+.pydevproject
+todo.txt

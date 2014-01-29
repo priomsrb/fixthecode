@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block pageHeading %}Create Question{% endblock %}
+
+{% block content %}
+<div class="editQuestionForm">
+  <form action="{% url 'create_question_submit' %}" method="post">
+    {% csrf_token %}
+    <div class="field">
+      <label>Name:</label>
+      <input type="text" name="name" size="42" maxlength="100"/>
+    </div>
+    <div class="field">
+      <label>Description:</label>
+      <textarea name="description" cols="40" rows="10" maxlength="4000"></textarea>
+    </div>
+    <div class="field">
+      <label>Code:</label>
+      <textarea name="code" cols="40" rows="10" maxlength="4000"></textarea>
+    </div>
+    <div class="field">
+      <label>Incorrect Lines:</label>
+      <textarea name="incorrect_lines" cols="40" rows="5" maxlength="4000"></textarea>
+    </div>
+    <div class="field">
+      <label>Next Question ID:</label>
+      <input type="text" name="next_question_id" size="10" maxlength="10"/>
+    </div>
+
+    <a href="{% url 'list_questions' %}">Cancel</a>
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+{% endblock %}
+

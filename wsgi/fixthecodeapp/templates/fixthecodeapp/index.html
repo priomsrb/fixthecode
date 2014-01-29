@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Fix The Code!{% endblock %}
+
+{% block content %}
+
+<div class="banner">
+  <h1>Fix The Code</h1>
+
+  <div class="bannerText">
+    <p>Fix The Code is a game where you have to rearrange lines of code to make them work.</p>
+  </div>
+
+  <div id="buttonContainer">
+    <a href="{% url 'list_questions' %}">
+      <div class="bigButton" id="bigSignIn">Sign in</div>
+    </a>
+
+    <a href="{% url 'list_questions' %}">
+      <div class="bigButton" id="bigPlayNow">Play Now!</div>
+    </a>
+  </div>
+
+  <div class="clear"></div>
+
+</div>
+<!--<p><a href="{% url 'create_question' %}">Create a question!</a></p>-->
+
+<!--<p><a href="{% url 'list_questions' %}">See all questions</a></p>-->
+
+{% endblock %}
+
